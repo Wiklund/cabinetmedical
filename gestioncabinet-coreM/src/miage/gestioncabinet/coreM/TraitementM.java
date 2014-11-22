@@ -32,5 +32,9 @@ public class TraitementM implements Traitement {
 		this.posologie = posologie;
 		
 	}
+	
+	public String toString(){
+		return this.getClass().getSimpleName() + " " + this.getProduit() + " : " + this.getPosologie();
+	}
 
 }

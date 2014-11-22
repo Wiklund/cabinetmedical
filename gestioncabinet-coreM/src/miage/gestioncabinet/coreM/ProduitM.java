@@ -29,5 +29,9 @@ public class ProduitM implements Produit {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
+	public String toString(){
+		return this.getClass().getSimpleName() + " " + this.getCis() + " " + this.getNom();
+	}
 
 }

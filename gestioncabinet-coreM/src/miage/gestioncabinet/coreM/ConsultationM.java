@@ -16,21 +16,21 @@ public class ConsultationM implements Consultation {
 	 * L'identifiant par défaut
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Patient concerné par la consultation
 	 */
 	private Patient patient;
-	
+
 	/**
 	 * Date de début de la consultation
 	 */
 	private Calendar debut;
-	
+
 	/**
 	 * Date de fin
 	 */
-	
+
 	private Calendar fin; 
 	/**
 	 * Compte rendu 
@@ -39,13 +39,13 @@ public class ConsultationM implements Consultation {
 	/**
 	 * Liste des traitements
 	 */
-	
+
 	private List<Traitement> prescription; 
 	/**
 	 * Medecin réalisant la consultation
 	 */
 	private Medecin medecin;
-	
+
 	private List<Interaction> interactions;
 
 	@Override
@@ -56,7 +56,7 @@ public class ConsultationM implements Consultation {
 		}
 		return compare;
 	}
-	
+
 	@Override
 	public boolean equals(Object arg0) {
 		//TODO Revoir le but du equals
@@ -64,11 +64,19 @@ public class ConsultationM implements Consultation {
 		if(!equals){
 			if(arg0 instanceof Consultation){
 				Consultation consultation = (Consultation) arg0;
-				equals = this.getDebut().equals(consultation.getDebut());
+				equals = this.getMedecin().equals(consultation.getMedecin());
+				if(equals){
+					equals = this.getPatient().equals(consultation.getPatient());
+					if(equals){
+						equals = this.getDebut().equals(consultation.getDebut());
+						if(equals){
+							equals = this.getFin().equals(consultation.getFin());
+						}
+					}
+				}
 			}
-			
 		}
-		return true;
+		return equals;
 	}
 
 	/**
@@ -121,9 +129,9 @@ public class ConsultationM implements Consultation {
 	@Override
 	public void setDebut(Calendar date) {
 		this.debut = date;
-		
+
 	}
-	 
+
 	/**
 	 * Définit la date de fin de la consultation
 	 */
@@ -131,14 +139,14 @@ public class ConsultationM implements Consultation {
 	public Calendar getFin() {
 		return this.fin;
 	}
-	
+
 	/**
 	 * Définit la date de fin de la consultation
 	 */
 	@Override
 	public void setFin(Calendar date) {
-	 this.fin = date;
-		
+		this.fin = date;
+
 	}
 	/**
 	 * Compte rendu de la consultation
@@ -154,10 +162,10 @@ public class ConsultationM implements Consultation {
 
 	@Override
 	public void setCompteRendu(String texte) {
-	 this.compteRendu = texte;
-		
+		this.compteRendu = texte;
+
 	}
-	
+
 	/**
 	 * Liste des traitements
 	 */
@@ -190,7 +198,10 @@ public class ConsultationM implements Consultation {
 	@Override
 	public void setInteractions(List<Interaction> interactions) {
 		this.interactions = interactions;
-		
+	}
+
+	public String toString(){
+		return this.getClass().getSimpleName() + " pour " + this.getPatient();
 	}
 
 }
